@@ -34,9 +34,29 @@ class MainActivity : ComponentActivity() {
                     var myText by rememberSaveable {
                         mutableStateOf("")
                     }
-                    MyTextFieldOutLined(myText) { myText = it }
+                    //MyTextFieldOutLined(myText) { myText = it }
+                    MyButtons()
                 }
             }
+        }
+    }
+
+}
+
+@Composable
+fun MyButtons(){
+    var algo by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Column(Modifier.fillMaxSize()) {
+        Button(onClick = { algo != algo }) {
+            Text(text = "algo")
+        }
+        OutlinedButton(onClick = { algo != algo}) {
+            Text(text = "algo outline")
+        }
+        TextButton(onClick = { algo != algo }) {
+            Text(text = "algo TextButton")
         }
     }
 
@@ -107,6 +127,7 @@ fun MyText() {
 fun DefaultPreview() {
     ComposeCatalogTheme {
         //MyText()
-        MyTextField()
+        //MyTextField()
+        MyButtons()
     }
 }
