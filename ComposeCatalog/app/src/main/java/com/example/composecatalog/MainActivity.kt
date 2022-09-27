@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.TextField
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +37,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun MyTextField(){
+
+    var myText by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    TextField(value = myText, onValueChange = {myText = it})
+}
+
+@Composable
 fun MyText() {
     Column(Modifier.fillMaxSize()) {
         Text(text = "Texto normal")
@@ -50,6 +62,7 @@ fun MyText() {
 @Composable
 fun DefaultPreview() {
     ComposeCatalogTheme {
-        MyText()
+        //MyText()
+        MyTextField()
     }
 }
