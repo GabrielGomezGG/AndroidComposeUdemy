@@ -31,7 +31,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyTextFieldOutLined()
+                    var myText by rememberSaveable {
+                        mutableStateOf("")
+                    }
+                    MyTextFieldOutLined(myText) { myText = it }
                 }
             }
         }
@@ -40,15 +43,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyTextFieldOutLined() {
+fun MyTextFieldOutLined(myText : String, textChange:(String) -> Unit) {
 
-    var myText by rememberSaveable {
-        mutableStateOf("")
-    }
+
     Column() {
         OutlinedTextField(
             value = myText,
-            onValueChange = { myText = it },
+            onValueChange = { textChange(it) },
             modifier = Modifier.padding(20.dp),
             label = { Text(text = "Algo") },
             colors = TextFieldDefaults.outlinedTextFieldColors(
