@@ -41,12 +41,29 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("")
                     }
                     //MyTextFieldOutLined(myText) { myText = it }
-                    MyProgressBarAdvence()
+                    //MyProgressBarAdvence()
+                    MySwitch()
                 }
             }
         }
     }
 
+}
+
+@Composable
+fun MySwitch() {
+    var estado by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Switch(
+        checked = estado,
+        onCheckedChange = { estado = !estado },
+        colors = SwitchDefaults.colors(
+            checkedThumbColor = Color.Red,
+            uncheckedThumbColor = Color.Green
+        )
+    )
 }
 
 @Composable
@@ -59,7 +76,9 @@ fun MyProgressBar() {
         LinearProgressIndicator(color = Color.Green, backgroundColor = Color.Cyan)
 
     }
-}@Composable
+}
+
+@Composable
 fun MyProgressBarAdvence() {
 
     var valor by rememberSaveable {
