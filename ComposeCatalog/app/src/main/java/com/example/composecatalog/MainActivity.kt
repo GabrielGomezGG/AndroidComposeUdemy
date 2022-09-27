@@ -38,20 +38,33 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-
-                    val myOpcions = getOpcions(listOf("aasdsad", "eqwewqe0", "asdasdas"))
-                    Column() {
-                        myOpcions.forEach {
-                            MyCheckBoxWithTextCompleted(it)
-                        }
+                    var select by rememberSaveable {
+                        mutableStateOf("Titi")
                     }
 
-
+                    MyRadioBottonList(select, {select=it})
                 }
             }
         }
     }
 
+}
+
+@Composable
+fun MyRadioBottonList(name : String, isSelect : (String) -> Unit){
+
+
+
+    Row(Modifier.fillMaxWidth()) {
+        RadioButton(selected = name == "titi" , onClick = { isSelect("titi") })
+        Text(text = "titi")
+
+        RadioButton(selected = name == "toto" , onClick = { isSelect("toto") })
+        Text(text = "toto")
+
+        RadioButton(selected = name == "tata" , onClick = { isSelect("tata") })
+        Text(text = "tata")
+    }
 }
 
 @Composable
