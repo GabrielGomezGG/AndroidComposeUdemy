@@ -9,8 +9,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -28,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyText()
+                    MyTextFieldAdvance()
                 }
             }
         }
@@ -37,13 +40,32 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyTextField(){
+fun MyTextField() {
 
     var myText by rememberSaveable {
         mutableStateOf("")
     }
 
-    TextField(value = myText, onValueChange = {myText = it})
+    TextField(value = myText, onValueChange = { myText = it })
+}
+
+@Composable
+fun MyTextFieldAdvance() {
+
+    var myText by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    TextField(
+        value = myText,
+        onValueChange = {
+            myText = if (it.contains("a")) {
+                it.replace("a", "")
+            } else {
+                it
+            }
+        },
+        label = { Text(text = "Intruduce algo: ") })
 }
 
 @Composable
