@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.layoutejemplo.ui.theme.LayoutEjemploTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,6 +43,9 @@ fun MyLayoutEjemplo(){
                 .background(Color.Red),
             contentAlignment = Alignment.Center
         ) {Text(text = "asdsadsa")}
+
+        MySpacer(sizeW = 0, sizeH = 10)
+
             Row(modifier =
             Modifier
                 .fillMaxWidth()
@@ -54,6 +58,7 @@ fun MyLayoutEjemplo(){
                     .background(Color.Green),
                     contentAlignment = Alignment.Center
                 ){Text(text = "asdsadsa")}
+                MySpacer(sizeW = 10, sizeH = 0)
                 Box(modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight()
@@ -61,6 +66,7 @@ fun MyLayoutEjemplo(){
                     contentAlignment = Alignment.Center
                 ){ Text(text = "asdsadsa")}
             }
+        MySpacer(sizeW = 0, sizeH = 10)
         Box(modifier = Modifier
             .fillMaxWidth()
             .weight(1f)
@@ -68,6 +74,13 @@ fun MyLayoutEjemplo(){
             contentAlignment = Alignment.BottomCenter
         ){ Text(text = "asdsadsa")}
     }
+}
+
+@Composable
+fun MySpacer(sizeW : Int, sizeH : Int){
+    Spacer(modifier = Modifier
+        .width(sizeW.dp)
+        .height(sizeH.dp))
 }
 
 @Preview(showBackground = true, showSystemUi = true)
