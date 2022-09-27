@@ -3,17 +3,24 @@ package com.example.composecatalog
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,15 +51,31 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyButtons(){
-    var algo by rememberSaveable {
+fun MyImages() {
+    Image(
+        painter = painterResource(id = R.drawable.ic_launcher_background),
+        contentDescription = null,
+        modifier = Modifier
+            .clip(shape = CircleShape)
+            .border(10.dp, color = Color.Blue, CircleShape)
+    )
+}
+
+@Composable
+fun MyIcons(){
+    Icon(imageVector = Icons.Rounded.Star, contentDescription =null )
+}
+
+@Composable
+fun MyButtons() {
+    val algo by rememberSaveable {
         mutableStateOf(false)
     }
     Column(Modifier.fillMaxSize()) {
         Button(onClick = { algo != algo }) {
             Text(text = "algo")
         }
-        OutlinedButton(onClick = { algo != algo}) {
+        OutlinedButton(onClick = { algo != algo }) {
             Text(text = "algo outline")
         }
         TextButton(onClick = { algo != algo }) {
@@ -63,7 +86,7 @@ fun MyButtons(){
 }
 
 @Composable
-fun MyTextFieldOutLined(myText : String, textChange:(String) -> Unit) {
+fun MyTextFieldOutLined(myText: String, textChange: (String) -> Unit) {
 
 
     Column() {
@@ -128,6 +151,8 @@ fun DefaultPreview() {
     ComposeCatalogTheme {
         //MyText()
         //MyTextField()
-        MyButtons()
+        //MyButtons()
+        //MyImages()
+        MyIcons()
     }
 }
