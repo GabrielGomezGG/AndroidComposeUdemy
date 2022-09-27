@@ -37,17 +37,75 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    var myText by rememberSaveable {
-                        mutableStateOf("")
+
+                    val myOpcions = getOpcions(listOf("aasdsad", "eqwewqe0", "asdasdas"))
+                    Column() {
+                        myOpcions.forEach {
+                            MyCheckBoxWithTextCompleted(it)
+                        }
                     }
-                    //MyTextFieldOutLined(myText) { myText = it }
-                    //MyProgressBarAdvence()
-                    MySwitch()
+
+
                 }
             }
         }
     }
 
+}
+
+@Composable
+fun getOpcions(title: List<String>): List<CheckBoxInfo> {
+
+    return title.map {
+        var estado by rememberSaveable {
+            mutableStateOf(true)
+        }
+
+        CheckBoxInfo(
+            title = it,
+            isChecked = estado,
+            isChangeCheck = { a -> estado = a }
+        )
+    }
+
+}
+
+@Composable
+fun MyCheckBoxWithTextCompleted(checkInfo: CheckBoxInfo) {
+
+    Row(Modifier.padding(8.dp)) {
+        Checkbox(
+            checked = checkInfo.isChecked,
+            onCheckedChange = { checkInfo.isChangeCheck(!checkInfo.isChecked) },
+            colors = CheckboxDefaults.colors(
+                checkedColor = Color.Red
+            )
+        )
+
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = checkInfo.title)
+    }
+}
+
+@Composable
+fun MyCheckBoxWithText() {
+
+    var estado by rememberSaveable {
+        mutableStateOf(true)
+    }
+
+    Row(Modifier.padding(8.dp)) {
+        Checkbox(
+            checked = estado,
+            onCheckedChange = { estado = !estado },
+            colors = CheckboxDefaults.colors(
+                checkedColor = Color.Red
+            )
+        )
+
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = "Texto 1")
+    }
 }
 
 @Composable
