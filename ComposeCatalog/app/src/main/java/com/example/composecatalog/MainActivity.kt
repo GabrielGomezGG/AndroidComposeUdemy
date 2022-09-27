@@ -5,9 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -42,12 +41,47 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("")
                     }
                     //MyTextFieldOutLined(myText) { myText = it }
-                    MyButtons()
+                    MyProgressBarAdvence()
                 }
             }
         }
     }
 
+}
+
+@Composable
+fun MyProgressBar() {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(color = Color.Red, strokeWidth = 15.dp)
+        LinearProgressIndicator(color = Color.Green, backgroundColor = Color.Cyan)
+
+    }
+}@Composable
+fun MyProgressBarAdvence() {
+
+    var valor by rememberSaveable {
+        mutableStateOf(0f)
+    }
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(progress = valor)
+
+        Row(Modifier.fillMaxWidth()) {
+            Button(onClick = { valor += 0.1f }) {
+                Text(text = "Incrementar")
+            }
+            Button(onClick = { valor -= 0.1f }) {
+                Text(text = "Reducir")
+            }
+        }
+
+    }
 }
 
 @Composable
@@ -62,8 +96,8 @@ fun MyImages() {
 }
 
 @Composable
-fun MyIcons(){
-    Icon(imageVector = Icons.Rounded.Star, contentDescription =null )
+fun MyIcons() {
+    Icon(imageVector = Icons.Rounded.Star, contentDescription = null)
 }
 
 @Composable
