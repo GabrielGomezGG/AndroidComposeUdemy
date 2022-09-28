@@ -3,6 +3,7 @@ package com.example.composecatalog
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -23,10 +24,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composecatalog.ui.theme.ComposeCatalogTheme
+import com.example.composecatalog.ui.theme.Shapes
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,7 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("Titi")
                     }
 
-                    MyRadioBottonList(select, {select=it})
+                    MyRadioBottonList(select, { select = it })
                 }
             }
         }
@@ -50,30 +53,55 @@ class MainActivity : ComponentActivity() {
 
 }
 
+@Preview(showSystemUi = true)
 @Composable
-fun MyRadioBottonList(name : String, isSelect : (String) -> Unit){
+fun MyCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = 50.dp,
+        shape = Shapes.medium,
+        backgroundColor = Color.Magenta,
+        border = BorderStroke(12.dp,Color.Red)
+    ) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)) {
+            Text(text = "Titulo", Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            Text(
+                text = "Lorem asdksaidksaj ajskdlsajfklsa jaklsdjsalkjdlksa",
+                Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Left
 
+            )
+        }
+    }
+}
+
+@Composable
+fun MyRadioBottonList(name: String, isSelect: (String) -> Unit) {
 
 
     Row(Modifier.fillMaxWidth()) {
-        RadioButton(selected = name == "titi" , onClick = { isSelect("titi") })
+        RadioButton(selected = name == "titi", onClick = { isSelect("titi") })
         Text(text = "titi")
 
-        RadioButton(selected = name == "toto" , onClick = { isSelect("toto") })
+        RadioButton(selected = name == "toto", onClick = { isSelect("toto") })
         Text(text = "toto")
 
-        RadioButton(selected = name == "tata" , onClick = { isSelect("tata") })
+        RadioButton(selected = name == "tata", onClick = { isSelect("tata") })
         Text(text = "tata")
     }
 }
 
 @Composable
-fun MyTriStatusCheckBox(){
+fun MyTriStatusCheckBox() {
     var status by rememberSaveable {
         mutableStateOf(ToggleableState.Off)
     }
     TriStateCheckbox(state = status, onClick = {
-        status = when(status){
+        status = when (status) {
             ToggleableState.On -> ToggleableState.Off
             ToggleableState.Off -> ToggleableState.Indeterminate
             ToggleableState.Indeterminate -> ToggleableState.On
