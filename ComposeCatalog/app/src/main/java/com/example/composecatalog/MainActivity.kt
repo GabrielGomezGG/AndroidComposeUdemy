@@ -1,6 +1,7 @@
 package com.example.composecatalog
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -42,11 +43,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colors.background
                 ) {
-                    var select by rememberSaveable {
-                        mutableStateOf("Titi")
-                    }
 
-                    MyRadioBottonList(select, { select = it })
                 }
             }
         }
@@ -140,16 +137,19 @@ fun MyCard() {
 @Composable
 fun MyRadioBottonList(name: String, isSelect: (String) -> Unit) {
 
-
-    Row(Modifier.fillMaxWidth()) {
-        RadioButton(selected = name == "titi", onClick = { isSelect("titi") })
-        Text(text = "titi")
-
-        RadioButton(selected = name == "toto", onClick = { isSelect("toto") })
-        Text(text = "toto")
-
-        RadioButton(selected = name == "tata", onClick = { isSelect("tata") })
-        Text(text = "tata")
+    Column(Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(selected = name == "titi", onClick = { isSelect("titi") })
+            Text(text = "titi")
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(selected = name == "toto", onClick = { isSelect("toto") })
+            Text(text = "toto")
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(selected = name == "tata", onClick = { isSelect("tata") })
+            Text(text = "tata")
+        }
     }
 }
 
