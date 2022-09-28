@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -39,7 +40,6 @@ class MainActivity : ComponentActivity() {
             ComposeCatalogTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     var select by rememberSaveable {
@@ -52,6 +52,46 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyDropdownMenu() {
+    var selectText by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var expended by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    var postres = listOf<String>("adas","qwewqe","zxczcz","klkhi")
+
+    Column(Modifier.padding(16.dp)) {
+        OutlinedTextField(
+            value = selectText,
+            onValueChange = { selectText = it },
+            enabled = false,
+            readOnly = true,
+            modifier = Modifier
+                .clickable { expended = true }
+                .fillMaxWidth()
+        )
+        DropdownMenu(
+            expanded = expended,
+            onDismissRequest = { expended = false },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            postres.forEach{postre ->
+                DropdownMenuItem(onClick = {
+                    expended=false
+                    selectText = postre
+                }) {
+                    Text(text = postre)
+                }
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)
