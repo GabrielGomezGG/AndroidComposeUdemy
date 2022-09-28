@@ -23,6 +23,47 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
+fun MyLoginScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        MyHeader(Modifier.align(Alignment.TopEnd))
+        MyBody(Modifier.align(Alignment.Center))
+        MyFooter(Modifier.align(Alignment.BottomCenter))
+    }
+}
+
+@Composable
+fun MyFooter(modifier: Modifier) {
+    Column(modifier = modifier.fillMaxWidth()) {
+        Divider(
+            modifier = Modifier
+                .background(Color(0xFFF9F9F9))
+                .height(1.dp)
+        )
+        Spacer(modifier = Modifier.size(24.dp))
+        MySingUp(Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.size(24.dp))
+    }
+}
+
+@Composable
+fun MySingUp(modifier: Modifier) {
+    Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        Text(text = "Don't have an account", fontSize = 12.sp, color = Color.Gray)
+        Text(
+            text = "Sing up.",
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF4EA8E9),
+            modifier = modifier.padding(horizontal = 6.dp)
+        )
+    }
+}
+
+@Composable
 fun MyBody(modifier: Modifier) {
 
     var email by rememberSaveable {
@@ -99,18 +140,6 @@ fun MyLoginDivider() {
                 .height(1.dp)
                 .weight(1f)
         )
-    }
-}
-
-@Composable
-fun MyLoginScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp)
-    ) {
-        MyHeader(Modifier.align(Alignment.TopEnd))
-        MyBody(Modifier.align(Alignment.Center))
     }
 }
 
