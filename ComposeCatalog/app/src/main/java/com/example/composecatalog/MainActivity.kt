@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,6 +54,21 @@ class MainActivity : ComponentActivity() {
 
 }
 
+@Preview(showBackground = true)
+@Composable
+fun MyBadgeBox() {
+    BadgedBox(
+
+        badge = {
+            Badge { Text(text = "10") }
+        }) {
+        Icon(
+            Icons.Filled.Favorite,
+            contentDescription = "Favorite"
+        )
+    }
+}
+
 @Preview(showSystemUi = true)
 @Composable
 fun MyCard() {
@@ -63,11 +79,13 @@ fun MyCard() {
         elevation = 50.dp,
         shape = Shapes.medium,
         backgroundColor = Color.Magenta,
-        border = BorderStroke(12.dp,Color.Red)
+        border = BorderStroke(12.dp, Color.Red)
     ) {
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
             Text(text = "Titulo", Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
             Text(
                 text = "Lorem asdksaidksaj ajskdlsajfklsa jaklsdjsalkjdlksa",
