@@ -5,9 +5,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +22,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -149,7 +155,22 @@ fun MyEmail(
     onChangeText: (String) -> Unit,
     modifier: Modifier
 ) {
-    TextField(value = email, onValueChange = onChangeText, modifier = modifier.fillMaxWidth())
+    TextField(
+        value = email,
+        onValueChange = { onChangeText(it) },
+        modifier = Modifier.fillMaxWidth(),
+        placeholder = { Text(text = "Email") },
+        maxLines = 1,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color(0xFFB2B2B2),
+            backgroundColor = Color(0xFFFAFAFA),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        )
+
+    )
 }
 
 @Composable
@@ -171,7 +192,42 @@ fun MyForgotPassword(modifier: Modifier) {
 
 @Composable
 fun MyPassword(password: String, onChangeText: (String) -> Unit, modifier: Modifier) {
-    TextField(value = password, onValueChange = onChangeText, modifier = modifier.fillMaxWidth())
+
+    var passwordVisible by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    TextField(
+        value = password,
+        onValueChange = onChangeText,
+        modifier = modifier.fillMaxWidth(),
+        placeholder = { Text(text = "Password")},
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        maxLines = 1,
+        singleLine = true,
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color(0xFFB2B2B2),
+            backgroundColor = Color(0xFFFAFAFA),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ),
+        trailingIcon = {
+            val imagen = if(passwordVisible){
+                Icons.Filled.VisibilityOff
+            }else{
+                Icons.Filled.Visibility
+            }
+            IconButton(onClick = { passwordVisible != passwordVisible }) {
+                Icon(imageVector = imagen, contentDescription = "show password")
+            }
+        },
+        visualTransformation = if(passwordVisible){
+            VisualTransformation.None
+        }else{
+            PasswordVisualTransformation()
+        }
+
+    )
 }
 
 @Composable
