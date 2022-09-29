@@ -1,6 +1,7 @@
 package com.example.composeinstagram
 
 import android.app.Activity
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.util.regex.Pattern
 
 @Composable
 fun MyLoginScreen() {
@@ -84,6 +86,8 @@ fun MyBody(modifier: Modifier) {
         mutableStateOf(false)
     }
 
+    isLogin = enableButton(email,password)
+
     Column(modifier = modifier) {
         MyLogo(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.size(16.dp))
@@ -101,8 +105,13 @@ fun MyBody(modifier: Modifier) {
     }
 }
 
+fun enableButton(email: String, password: String) : Boolean{
+    return Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length >= 7
+}
+
 @Composable
 fun MyLoginWithFacebook() {
+
     Row(
         Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -175,8 +184,18 @@ fun MyEmail(
 
 @Composable
 fun MyLoginButton(login: Boolean) {
-    Button(onClick = { /*TODO*/ }, enabled = login, modifier = Modifier.fillMaxWidth()) {
-        Text(text = "Log In")
+    Button(
+        onClick = { /*TODO*/ },
+        enabled = login,
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(0xFF4EA8E9),
+            disabledBackgroundColor = Color(0xFF78C8F9),
+            contentColor = Color.White,
+            disabledContentColor = Color.White
+        )
+        ) {
+            Text(text = "Log In")
     }
 }
 
@@ -217,7 +236,7 @@ fun MyPassword(password: String, onChangeText: (String) -> Unit, modifier: Modif
             }else{
                 Icons.Filled.Visibility
             }
-            IconButton(onClick = { passwordVisible != passwordVisible }) {
+            IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(imageVector = imagen, contentDescription = "show password")
             }
         },
