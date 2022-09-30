@@ -6,6 +6,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +38,7 @@ fun MyTuitScreen() {
             color = Color.Gray,
             thickness = 2.dp,
             modifier = Modifier.padding(vertical = 8.dp)
+                .alpha(0.4f)
         )
         Row(modifier = Modifier
             .padding(8.dp)) {
