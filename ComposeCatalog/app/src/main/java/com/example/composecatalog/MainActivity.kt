@@ -1,7 +1,6 @@
 package com.example.composecatalog
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -31,6 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.composecatalog.ui.theme.ComposeCatalogTheme
 import com.example.composecatalog.ui.theme.Shapes
 
@@ -43,7 +45,14 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colors.background
                 ) {
-                    MyScaffol()
+                    val navigationController = rememberNavController()
+                    NavHost(navController = navigationController,
+                    startDestination = "pantalla1"
+                    ){
+                        composable("pantalla1"){ pantalla1(navigationController)}
+                        composable("pantalla2"){ pantalla2(navigationController)}
+                        composable("pantalla3"){ pantalla3(navigationController)}
+                    }
                 }
             }
         }
