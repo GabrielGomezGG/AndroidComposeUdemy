@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import com.example.composecatalog.Routes.*
 
 @Composable
 fun pantalla1(navigationController: NavHostController) {
@@ -22,7 +23,7 @@ fun pantalla1(navigationController: NavHostController) {
             text = "Text1",
             Modifier
                 .align(Alignment.Center)
-                .clickable { navigationController.navigate("pantalla2") }
+                .clickable { navigationController.navigate(Pantalla2.route) }
         )
     }
 }
@@ -38,7 +39,7 @@ fun pantalla2(navigationController: NavHostController) {
             text = "Text2",
             Modifier
                 .align(Alignment.Center)
-                .clickable { navigationController.navigate("pantalla3") })
+                .clickable { navigationController.navigate(Pantalla3.route) })
     }
 }
 
@@ -53,6 +54,6 @@ fun pantalla3(navigationController: NavHostController) {
             text = "Text3",
             Modifier
                 .align(Alignment.Center)
-                .clickable { navigationController.navigate("pantalla1") })
+                .clickable { navigationController.navigate(Pantalla1.route) })
     }
 }

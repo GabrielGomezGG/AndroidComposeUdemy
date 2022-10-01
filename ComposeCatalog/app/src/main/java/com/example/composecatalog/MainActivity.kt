@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composecatalog.Routes.*
 import com.example.composecatalog.ui.theme.ComposeCatalogTheme
 import com.example.composecatalog.ui.theme.Shapes
 
@@ -47,11 +48,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navigationController = rememberNavController()
                     NavHost(navController = navigationController,
-                    startDestination = "pantalla1"
+                    startDestination = Pantalla1.route
                     ){
-                        composable("pantalla1"){ pantalla1(navigationController)}
-                        composable("pantalla2"){ pantalla2(navigationController)}
-                        composable("pantalla3"){ pantalla3(navigationController)}
+                        composable(Pantalla1.route){ pantalla1(navigationController)}
+                        composable(Pantalla2.route){ pantalla2(navigationController)}
+                        composable(Pantalla3.route){ pantalla3(navigationController)}
                     }
                 }
             }
