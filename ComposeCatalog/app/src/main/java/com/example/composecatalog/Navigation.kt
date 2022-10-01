@@ -54,6 +54,21 @@ fun pantalla3(navigationController: NavHostController) {
             text = "Text3",
             Modifier
                 .align(Alignment.Center)
+                .clickable { navigationController.navigate("pantalla4/4") })
+    }
+}
+
+@Composable
+fun pantalla4(navigationController: NavHostController, name : String) {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(Color.Magenta)
+    ) {
+        Text(
+            text = name,
+            Modifier
+                .align(Alignment.Center)
                 .clickable { navigationController.navigate(Pantalla1.route) })
     }
 }

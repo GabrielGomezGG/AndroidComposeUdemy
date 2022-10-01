@@ -30,9 +30,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavArgument
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.composecatalog.Routes.*
 import com.example.composecatalog.ui.theme.ComposeCatalogTheme
 import com.example.composecatalog.ui.theme.Shapes
@@ -47,12 +50,28 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val navigationController = rememberNavController()
-                    NavHost(navController = navigationController,
-                    startDestination = Pantalla1.route
-                    ){
-                        composable(Pantalla1.route){ pantalla1(navigationController)}
-                        composable(Pantalla2.route){ pantalla2(navigationController)}
-                        composable(Pantalla3.route){ pantalla3(navigationController)}
+                    NavHost(
+                        navController = navigationController,
+                        startDestination = Pantalla1.route
+                    ) {
+                        composable(Pantalla1.route) { pantalla1(navigationController) }
+                        composable(Pantalla2.route) { pantalla2(navigationController) }
+                        composable(Pantalla3.route) { pantalla3(navigationController) }
+                        composable(
+                            "pantalla4/{name}",
+                            arguments = listOf(
+                                navArgument("name"){
+                                    type = NavType.StringType
+                                }
+                            )
+                        ) { navBackStackEntry ->
+                            navBackStackEntry.arguments?.getString("name")?.let {
+                                pantalla4(
+                                    navigationController,
+                                    it
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -72,7 +91,7 @@ fun MyDropdownMenu() {
         mutableStateOf(false)
     }
 
-    var postres = listOf<String>("adas","qwewqe","zxczcz","klkhi")
+    var postres = listOf<String>("adas", "qwewqe", "zxczcz", "klkhi")
 
     Column(Modifier.padding(16.dp)) {
         OutlinedTextField(
@@ -89,9 +108,9 @@ fun MyDropdownMenu() {
             onDismissRequest = { expended = false },
             modifier = Modifier.fillMaxWidth()
         ) {
-            postres.forEach{postre ->
+            postres.forEach { postre ->
                 DropdownMenuItem(onClick = {
-                    expended=false
+                    expended = false
                     selectText = postre
                 }) {
                     Text(text = postre)
