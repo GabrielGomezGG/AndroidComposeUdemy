@@ -54,7 +54,10 @@ fun pantalla3(navigationController: NavHostController) {
             text = "Text3",
             Modifier
                 .align(Alignment.Center)
-                .clickable { navigationController.navigate("pantalla4/4") })
+                .clickable {
+                    navigationController.navigate(Pantalla4.createRoute("algo"))
+                }
+        )
     }
 }
 
@@ -66,7 +69,7 @@ fun pantalla4(navigationController: NavHostController, name : String) {
             .background(Color.Magenta)
     ) {
         Text(
-            text = name,
+            text = "I AM THE BEST $name",
             Modifier
                 .align(Alignment.Center)
                 .clickable { navigationController.navigate(Pantalla1.route) })

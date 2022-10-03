@@ -32,19 +32,31 @@ import com.example.composeinstagram.R
 
 @Composable
 fun MyLoginScreen(loginViewModel: LoginViewModel) {
+
+    val isLoading by loginViewModel.isLoading.observeAsState(initial = false)
+
+
     Box(
+
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp)
+            .padding(8.dp),
+        contentAlignment = Alignment.Center
     ) {
-        MyHeader(Modifier.align(Alignment.TopEnd))
-        MyBody(Modifier.align(Alignment.Center), loginViewModel)
-        MyFooter(Modifier.align(Alignment.BottomCenter))
+        if (!isLoading) {
+            MyHeader(Modifier.align(Alignment.TopEnd))
+            MyBody(Modifier.align(Alignment.Center), loginViewModel)
+            MyFooter(Modifier.align(Alignment.BottomCenter))
+        } else {
+            CircularProgressIndicator()
+
+        }
     }
 }
 
 @Composable
 fun MyFooter(modifier: Modifier) {
+
     Column(modifier = modifier.fillMaxWidth()) {
         Divider(
             modifier = Modifier
@@ -74,29 +86,28 @@ fun MySingUp(modifier: Modifier) {
 @Composable
 fun MyBody(modifier: Modifier, loginViewModel: LoginViewModel) {
 
-    val email:String by loginViewModel.email.observeAsState(initial = "")
+    val email: String by loginViewModel.email.observeAsState(initial = "")
 
-    val password:String by loginViewModel.password.observeAsState(initial = "")
+    val password: String by loginViewModel.password.observeAsState(initial = "")
 
-    val isLogin:Boolean by loginViewModel.isLogin.observeAsState(initial = false)
+    val isLogin: Boolean by loginViewModel.isLogin.observeAsState(initial = false)
 
     Column(modifier = modifier) {
         MyLogo(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.size(16.dp))
         MyEmail(email, { loginViewModel.onLoginChange(it, password) }, Modifier)
         Spacer(modifier = Modifier.size(4.dp))
-        MyPassword(password, { loginViewModel.onLoginChange(email,it)}, Modifier)
+        MyPassword(password, { loginViewModel.onLoginChange(email, it) }, Modifier)
         Spacer(modifier = Modifier.size(8.dp))
         MyForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.size(16.dp))
-        MyLoginButton(isLogin)
+        MyLoginButton(isLogin, loginViewModel)
         Spacer(modifier = Modifier.size(8.dp))
         MyLoginDivider()
         Spacer(modifier = Modifier.size(32.dp))
         MyLoginWithFacebook()
     }
 }
-
 
 
 @Composable
@@ -173,9 +184,9 @@ fun MyEmail(
 }
 
 @Composable
-fun MyLoginButton(login: Boolean) {
+fun MyLoginButton(login: Boolean, loginViewModel: LoginViewModel) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { loginViewModel.onLoginSelect() },
         enabled = login,
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
@@ -184,8 +195,8 @@ fun MyLoginButton(login: Boolean) {
             contentColor = Color.White,
             disabledContentColor = Color.White
         )
-        ) {
-            Text(text = "Log In")
+    ) {
+        Text(text = "Log In")
     }
 }
 
@@ -210,7 +221,7 @@ fun MyPassword(password: String, onChangeText: (String) -> Unit, modifier: Modif
         value = password,
         onValueChange = onChangeText,
         modifier = modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Password")},
+        placeholder = { Text(text = "Password") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         maxLines = 1,
         singleLine = true,
@@ -221,18 +232,18 @@ fun MyPassword(password: String, onChangeText: (String) -> Unit, modifier: Modif
             unfocusedIndicatorColor = Color.Transparent
         ),
         trailingIcon = {
-            val imagen = if(passwordVisible){
+            val imagen = if (passwordVisible) {
                 Icons.Filled.VisibilityOff
-            }else{
+            } else {
                 Icons.Filled.Visibility
             }
             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                 Icon(imageVector = imagen, contentDescription = "show password")
             }
         },
-        visualTransformation = if(passwordVisible){
+        visualTransformation = if (passwordVisible) {
             VisualTransformation.None
-        }else{
+        } else {
             PasswordVisualTransformation()
         }
 
