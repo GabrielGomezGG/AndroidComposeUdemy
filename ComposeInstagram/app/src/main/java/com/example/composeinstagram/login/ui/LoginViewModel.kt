@@ -39,7 +39,7 @@ class LoginViewModel : ViewModel() {
     fun onLoginSelect(){
         viewModelScope.launch {
             _isLoading.value = true
-            val result = loginUserCase(email.value!!, password.value!!)
+            val result = loginUserCase.doLogin(email.value!!, password.value!!)
 
             if(result){
                 Log.i("Titi", "asdasd $result")

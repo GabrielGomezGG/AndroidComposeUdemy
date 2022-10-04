@@ -35,7 +35,6 @@ fun MyLoginScreen(loginViewModel: LoginViewModel) {
 
     val isLoading by loginViewModel.isLoading.observeAsState(initial = false)
 
-
     Box(
 
         modifier = Modifier
