@@ -7,11 +7,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.composeinstagram.login.domain.LoginUserCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginUserCase: LoginUserCase
+) : ViewModel() {
 
-    val loginUserCase = LoginUserCase()
+    //val loginUserCase = LoginUserCase()
 
     private val _isLogin = MutableLiveData<Boolean>()
     val isLogin : LiveData<Boolean> = _isLogin
