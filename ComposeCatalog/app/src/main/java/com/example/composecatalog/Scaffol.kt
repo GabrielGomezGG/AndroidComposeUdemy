@@ -11,9 +11,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
+@Preview
 @Composable
 fun MyScaffol() {
 
@@ -70,8 +72,8 @@ fun MyModelDrawer(onCloseDrawe: () -> Unit) {
 fun MyFAB() {
     FloatingActionButton(
         onClick = { /*TODO*/ },
-        backgroundColor = Color.Green,
-        contentColor = Color.Magenta
+        backgroundColor = Color(0xFF3DFFCC),
+        contentColor = Color(0xFF992805)
     ) {
         Icon(imageVector = Icons.Filled.Add, contentDescription = "add")
     }
