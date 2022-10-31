@@ -17,5 +17,7 @@
 |-|-|
 | ![Arquitectura](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/ComposeInstagram/arquitecturas.png) | ![Login](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/ComposeInstagram/login-instagram.png)|
 
+-----
+
 ## [Copia de tuits de twitter](https://github.com/GabrielGomezGG/AndroidComposeUdemy/tree/master/RetoCopiaTuits)
 ![Tuit](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/RetoCopiaTuits/reto-tuit.png)
