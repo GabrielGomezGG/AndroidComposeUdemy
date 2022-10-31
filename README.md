@@ -21,3 +21,17 @@
 
 ## [Copia de tuits de twitter](https://github.com/GabrielGomezGG/AndroidComposeUdemy/tree/master/RetoCopiaTuits)
 ![Tuit](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/RetoCopiaTuits/reto-tuit.png)
+
+----
+
+## [Conceptos basicos de compose](https://github.com/GabrielGomezGG/AndroidComposeUdemy/tree/master/ComposeCatalog)
+* Animations
+* Navegation
+* Scaffol
+* Slides
+* CheckBoxs
+* Dialogs
+
+| Scaffol | Dialog |
+|-|-|
+| ![](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/ComposeCatalog/scaffol.png) | ![](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/ComposeCatalog/dialog.png)|
