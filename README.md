@@ -1,6 +1,11 @@
 # Jetpack Compose de Udemy
 
-##  [Copia del login de instagram](https://github.com/GabrielGomezGG/AndroidComposeUdemy/tree/master/ComposeInstagram)
+#### Curso de Udemy de [AristiDevs](https://www.youtube.com/c/AristiDevs) 
+> <https://www.udemy.com/course/jetpack-compose-desde-0-a-profesional/>
+
+----
+
+## [Copia del login de instagram](https://github.com/GabrielGomezGG/AndroidComposeUdemy/tree/master/ComposeInstagram)
 
 * [Arquitectura de 3 capas](https://developer.android.com/topic/architecture?hl=es-419&authuser=1)
 * MVVM
@@ -11,3 +16,6 @@
 | Arquitectura del proyecto | Login instagram |
 |-|-|
 | ![Arquitectura](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/ComposeInstagram/arquitecturas.png) | ![Login](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/ComposeInstagram/login-instagram.png)|
+
+## [Copia de tuits de twitter](https://github.com/GabrielGomezGG/AndroidComposeUdemy/tree/master/RetoCopiaTuits)
+![Tuit](https://github.com/GabrielGomezGG/AndroidComposeUdemy/blob/master/RetoCopiaTuits/reto-tuit.png)
