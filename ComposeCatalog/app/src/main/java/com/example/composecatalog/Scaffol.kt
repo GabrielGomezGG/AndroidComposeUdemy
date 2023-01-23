@@ -1,19 +1,43 @@
 package com.example.composecatalog
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+
+@Preview
+@Composable
+fun qwe() {
+    val focusRequester = remember { FocusRequester() }
+    var color by remember { mutableStateOf(Black) }
+    Box(
+        Modifier
+            .fillMaxSize()
+            .clickable { focusRequester.requestFocus() }
+            .border(2.dp, color)
+            // The focusRequester should be added BEFORE the focusable.
+            .focusRequester(focusRequester)
+            // The onFocusChanged should be added BEFORE the focusable that is being observed.
+            .onFocusChanged { color = if (it.isFocused) Green else Black }
+            .focusable()
+    )
+}
 
 @Preview
 @Composable
@@ -56,15 +80,22 @@ fun MyScaffol() {
         drawerGesturesEnabled = false
 
     ) {
+
     }
 }
 
 @Composable
 fun MyModelDrawer(onCloseDrawe: () -> Unit) {
     Column(Modifier.padding(8.dp)) {
-        Text(text = "Algo1", modifier = Modifier.fillMaxWidth().clickable { onCloseDrawe() })
-        Text(text = "Algo1", modifier = Modifier.fillMaxWidth().clickable { onCloseDrawe() })
-        Text(text = "Algo1", modifier = Modifier.fillMaxWidth().clickable { onCloseDrawe() })
+        Text(text = "Algo1", modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onCloseDrawe() })
+        Text(text = "Algo1", modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onCloseDrawe() })
+        Text(text = "Algo1", modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onCloseDrawe() })
     }
 }
 
