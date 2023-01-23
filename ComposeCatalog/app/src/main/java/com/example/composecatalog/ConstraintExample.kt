@@ -16,7 +16,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 fun ConstraintLayoutExampleOne() {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
-        val (boxRed,boxBlue,boxGreen,boxMagenta) = createRefs()
+        val (boxRed,boxBlue,boxGreen,boxMagenta, boxYellow) = createRefs()
 
         Box(modifier = Modifier.size(125.dp).background(Color.Red).constrainAs(boxRed){
             top.linkTo(parent.top)
@@ -24,7 +24,14 @@ fun ConstraintLayoutExampleOne() {
             end.linkTo(parent.end)
             start.linkTo(parent.start)
         })
-        Box(modifier = Modifier.size(125.dp).background(Color.Blue).constrainAs(boxBlue){})
+        Box(modifier = Modifier.size(125.dp).background(Color.Blue).constrainAs(boxBlue){
+            top.linkTo(boxRed.bottom)
+            end.linkTo(boxRed.start)
+        })
+        Box(modifier = Modifier.size(125.dp).background(Color.Yellow).constrainAs(boxYellow){
+            top.linkTo(boxRed.bottom)
+            start.linkTo(boxRed.end)
+        })
         Box(modifier = Modifier.size(125.dp).background(Color.Green).constrainAs(boxGreen){
             bottom.linkTo(boxRed.top)
             end.linkTo(boxRed.start)
