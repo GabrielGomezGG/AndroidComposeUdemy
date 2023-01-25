@@ -5,12 +5,23 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.todoapp.todoapp.domain.AddTaskUseCase
+import com.example.todoapp.todoapp.domain.GetTasksUseCase
+import com.example.todoapp.todoapp.ui.TasksUiState.Success
 import com.example.todoapp.todoapp.ui.models.TaskModel
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TaskViewModel @Inject constructor(
-
+    private val addTaskUseCase: AddTaskUseCase,
+    getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
+
+    val uiState:StateFlow<TasksUiState> = getTasksUseCase().map(::Success)
+        .catch { TasksUiState.Error(it) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TasksUiState.Loading)
 
     private val _showDialog = MutableLiveData<Boolean>()
     val showDialog : LiveData<Boolean> = _showDialog;
@@ -27,9 +38,12 @@ class TaskViewModel @Inject constructor(
     }
 
     fun onTaskCreate(task: String) {
-        Log.i("titi", task)
         _showDialog.value = false
         _task.add(TaskModel(task = task))
+
+        viewModelScope.launch {
+            addTaskUseCase(TaskModel(task = task))
+        }
     }
 
     fun onCheckBoxSelected(taskModel: TaskModel) {
