@@ -67,7 +67,7 @@ fun ItemTask(taskModel: TaskModel, taskViewModel: TaskViewModel) {
             Text(text = taskModel.task, modifier = Modifier.weight(1f))
             Checkbox(
                 checked = taskModel.selected,
-                onCheckedChange = {  })
+                onCheckedChange = { taskViewModel.onCheckBoxSelected(taskModel) })
         }
     }
 }
