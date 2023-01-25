@@ -89,7 +89,7 @@ fun ItemTask(taskModel: TaskModel, taskViewModel: TaskViewModel) {
         elevation = 8.dp
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(text = taskModel.task, modifier = Modifier.weight(1f))
+            Text(text = taskModel.task, modifier = Modifier.weight(1f).padding(start = 8.dp))
             Checkbox(
                 checked = taskModel.selected,
                 onCheckedChange = { taskViewModel.onCheckBoxSelected(taskModel) })
