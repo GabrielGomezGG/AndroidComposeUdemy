@@ -8,14 +8,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todoapp.todoapp.domain.AddTaskUseCase
 import com.example.todoapp.todoapp.domain.GetTasksUseCase
+import com.example.todoapp.todoapp.domain.UpdateTaskUseCase
 import com.example.todoapp.todoapp.ui.TasksUiState.Success
 import com.example.todoapp.todoapp.ui.models.TaskModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TaskViewModel @Inject constructor(
     private val addTaskUseCase: AddTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase,
     getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
@@ -51,6 +55,9 @@ class TaskViewModel @Inject constructor(
 //        _task[index] = _task[index].let {
 //            it.copy(selected = !it.selected)
 //        }
+        viewModelScope.launch {
+            updateTaskUseCase(taskModel.copy(selected = !taskModel.selected))
+        }
     }
 
     fun onItemRemove(taskModel: TaskModel) {
